@@ -13,7 +13,9 @@
     </head>
     <body class="font-sans antialiased text-black">
         <header class="!bg-black text-white/50 flex justify-between px-10 py-5">
-            <h1>Sistema de Gerenciamento de Obras</h1>
+            <a href="/">
+                <h1>Sistema de Gerenciamento de Obras</h1>
+            </a>
             <div class="flex gap-10 items-center">
                 <p>Olá, {{ Auth::user()->name }}!</p>
                 <form action="{{ route('logout') }}" method="POST" class="inline">
@@ -24,7 +26,7 @@
         </header>
         <main class="flex gap-10">
             <aside class="bg-blue-500 h-screen p-10 gap-3 flex flex-col">
-                <a href="/processos" class="bg-blue-600 p-3 rounded hover:scale-105 hover:cursor-pointer transition-all">Processos</a>
+                <a href="/planilhas" class="bg-blue-600 p-3 rounded hover:scale-105 hover:cursor-pointer transition-all">Processos</a>
                 <a href="/cronogramas" class="bg-blue-600 p-3 rounded hover:scale-105 hover:cursor-pointer transition-all">Cronogramas</a>
             </aside>
             <div class="p-4">
