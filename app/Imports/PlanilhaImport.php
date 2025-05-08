@@ -24,11 +24,21 @@ class PlanilhaImport implements ToModel, WithStartRow
 
     public function model(array $row)
     {
-        if (empty($row[2])) { // Agora verificamos o campo profissional que está no índice 2
+        if (empty($row[2])) { // Verificamos o campo profissional que está no índice 2
             return null;
         }
 
         $this->rows++;
+
+        // Debug específico para identificar o problema com o campo tipo
+        // dd([
+        //     'row_completa' => $row,
+        //     'profissional' => $row[2] ?? 'não definido',
+        //     'funcao' => $row[3] ?? 'não definido',
+        //     'valor_bruto_tipo' => $row[19],
+        //     'planilha_id' => $this->planilha_id,
+        //     'índice_atual' => $this->rows,
+        // ]);
 
         return new DadoPlanilha([
             'planilha_id' => $this->planilha_id,
@@ -49,20 +59,9 @@ class PlanilhaImport implements ToModel, WithStartRow
             'banco' => $row[16] ?? null,
             'agencia' => $row[17] ?? null,
             'conta' => $row[18] ?? null,
-            'tipo' => $this->mapSelectBoxValue($row[19]),
+            'tipo_conta' => $row[19],
             'telefone' => $row[20] ?? null,
         ]);
-    }
-
-    private function mapSelectBoxValue($value)
-    {
-        $options = [
-            'Sim' => 1,
-            'Não' => 0,
-            'Pendente' => 2,
-        ];
-
-        return $options[$value] ?? null; // Retorna o valor mapeado ou null se não existir
     }
 
     private function parseDecimal($value)

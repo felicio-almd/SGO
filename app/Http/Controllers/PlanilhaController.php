@@ -58,6 +58,7 @@ class PlanilhaController extends Controller
         foreach ($dados as $dadoId => $dado) {
             DadoPlanilha::where('id', $dadoId)->update($dado);
         }
+
         return redirect()->route('planilha.editar', $id)->with('success', 'Planilha atualizada com sucesso.');
     }
 
@@ -87,30 +88,31 @@ class PlanilhaController extends Controller
             ['valor' => $request->valor]
         );
 
-            return response()->json(['success' => true]);
-        }
+        return response()->json(['success' => true]);
+    }
 
-        public function export(Request $request, $id)
-        {
-            // Validação do ID da planilha (opcional)
-            $planilha = Planilha::findOrFail($id);
-
-            // Cria a exportação com o ID da planilha
-            $export = new PlanilhaExport($planilha->id);
-
-            // Define o nome do arquivo
-            $fileName = 'planilha_' . $planilha->id . '.xlsx';
-
-            // Faz o download do arquivo
-            return Excel::download($export, $fileName);
-        }
-
-    public function destroy ($id){
-        
+    public function export(Request $request, $id)
+    {
+        // Validação do ID da planilha (opcional)
         $planilha = Planilha::findOrFail($id);
-        
+
+        // Cria a exportação com o ID da planilha
+        $export = new PlanilhaExport($planilha->id);
+
+        // Define o nome do arquivo
+        $fileName = 'planilha_'.$planilha->id.'.xlsx';
+
+        // Faz o download do arquivo
+        return Excel::download($export, $fileName);
+    }
+
+    public function destroy($id)
+    {
+
+        $planilha = Planilha::findOrFail($id);
+
         $planilha->delete();
-        
-        return back()->with('success', "Planilha deletada com sucesso");
+
+        return back()->with('success', 'Planilha deletada com sucesso');
     }
 }

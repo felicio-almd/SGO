@@ -33,28 +33,31 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="min-w-full bg-white border border-gray-300">
-                    <thead>
-                        <tr class="bg-gray-100">
-                            @foreach ($headers as $header)
-                                <th class="py-2 px-4 border-b border-gray-300 text-left">{{ $header }}</th>
-                            @endforeach
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($rows as $row)
-                            <tr class="hover:bg-gray-50">
-                                @foreach ($headers as $header)
-                                    <td class="py-2 px-4 border-b border-gray-300">
-                                        {{ $row[$header] }}
-                                    </td>
-                                @endforeach
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <table class="min-w-full bg-white border border-gray-200 shadow-sm" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                @foreach ($headers as $header)
+                    <th class="py-2 px-3 border border-gray-300 text-left bg-gray-100 font-semibold text-gray-700 sticky top-0" style="background-color: #f1f1f1;">
+                        {{ $header }}
+                    </th>
+                @endforeach
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($rows as $index => $row)
+                <tr class="{{ $index % 2 === 0 ? 'bg-white' : 'bg-gray-50' }} hover:bg-blue-50">
+                    @foreach ($headers as $header)
+                        <td class="py-1.5 px-3 border border-gray-200">
+                                {{ $row[$header] }}
+                        </td>
+                    @endforeach
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+
     </main>
 </body>
 </html>

@@ -47,6 +47,26 @@ class DadoPlanilha extends Model
         'valor_a_pagar' => 'decimal:2',
     ];
 
+    private function formatarValor($valor, $tipo)
+    {
+        if ($valor === null) {
+            return null;
+        }
+
+        switch ($tipo) {
+            case 'integer':
+                return (int) $valor;
+            case 'decimal':
+                return (float) $valor;
+            case 'date':
+                return \Carbon\Carbon::parse($valor);
+            case 'boolean':
+                return (bool) $valor;
+            default:
+                return $valor;
+        }
+    }
+
     public function planilha()
     {
         return $this->belongsTo(Planilha::class);

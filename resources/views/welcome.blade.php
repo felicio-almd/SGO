@@ -17,7 +17,6 @@
                 <h1>Sistema de Gerenciamento de Obras</h1>
             </a>
             <div class="flex gap-10 items-center">
-                <p>Olá, {{ Auth::user()->name }}!</p>
                 <form action="{{ route('logout') }}" method="POST" class="inline">
                     @csrf
                     <button type="submit" class="text-sm font-medium text-red-500 hover:underline">Sair</button>
